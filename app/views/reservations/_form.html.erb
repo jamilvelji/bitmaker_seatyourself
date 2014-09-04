@@ -12,12 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :booking %><br>
-    <%= f.datetime_select :booking %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
+    <%= f.label :booking, "Choose your reservation date and time" %><br>
+    <%= f.datetime_select :booking, :default => 24.hours.from_now, :minute_step => 30 %>
   </div>
   <div class="field">
     <%= f.label :restaurant_id %><br>
