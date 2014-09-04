@@ -38,6 +38,8 @@ gem 'spring',        group: :development
 
 gem 'devise', '~> 3.3.0'
 gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
+
 group :development, :test do
   gem 'sqlite3'
 end

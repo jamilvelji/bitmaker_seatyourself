@@ -1,28 +1,19 @@
-== README
+SeatYourself is a very basic OpenTable clone.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+v0.1 - aMVP Features:
+======================
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+> Restaurants are displayed on the homepage
+> Each restaurant has a display page which shows:
+    > Restaurant name
+    > Restaurant address
+    > Restaurant cuisine
+    > Restaurant reviews (sorted newest to oldest)
+> A user can add restaurants
+> A user can edit or delete restaurants they create
+> A user can add, edit or delete restaurant reviews owned by them
+> A user can add, edit or delete reservations owned by them
+> Users can signup, sign in and logout
+> User's profile page shows reservations made
+> A user can upload a menu to a restaurant owned by them
+> A user can upload a picture to a restaurant owned by them

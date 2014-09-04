@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /restaurants
   # GET /restaurants.json
@@ -10,6 +11,10 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show
+    @restaurant = Restaurant.find(params[:id])
+    if current_user
+      @review = @restaurant.reviews.build
+    end
   end
 
   # GET /restaurants/new

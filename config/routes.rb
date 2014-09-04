@@ -1,16 +1,13 @@
 Rails.application.routes.draw do
-  get 'reviews/show'
-
-  get 'reviews/create'
-
-  get 'reviews/destroy'
-
   devise_for :users
-  resources :reservations
+  resources :restaurants do
+    resources :reviews, only: [:show, :create, :destroy]
+    resources :reservations
+  end
 
-  resources :restaurants
-
-  root to: 'restaurant#index'
+  root to: 'restaurants#index'
+  get 'about' => "pages#about"
+  get 'contact' => "pages#contact"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
