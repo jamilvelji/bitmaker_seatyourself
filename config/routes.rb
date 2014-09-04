@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'reviews/show'
+
+  get 'reviews/create'
+
+  get 'reviews/destroy'
+
   devise_for :users
   resources :reservations
 
