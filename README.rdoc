@@ -9,6 +9,7 @@ v0.1 - aMVP Features:
     > Restaurant address
     > Restaurant cuisine
     > Restaurant reviews (sorted newest to oldest)
+    
 > A user can add restaurants
 > A user can edit or delete restaurants they create
 > A user can add, edit or delete restaurant reviews owned by them
@@ -17,3 +18,11 @@ v0.1 - aMVP Features:
 > User's profile page shows reservations made
 > A user can upload a menu to a restaurant owned by them
 > A user can upload a picture to a restaurant owned by them
+
+DONE
+============
+> Restaurants are displayed on the homepage
+> Each restaurant has a display page which shows:
+    > Restaurant name
+    > Restaurant address
+    > Restaurant reviews

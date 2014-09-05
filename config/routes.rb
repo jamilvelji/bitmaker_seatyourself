@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'cuisine/create'
+
+  get 'cuisine/destroy'
+
+  get 'cuisine/show'
+
   devise_for :users
   resources :restaurants do
     resources :reviews, only: [:show, :create, :destroy]
