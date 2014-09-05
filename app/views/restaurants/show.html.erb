@@ -13,10 +13,10 @@
 
   <% @restaurant.reviews.each do |review| %>
     <p>
-      <%= review.rating %><br/>
-      <%= review.comment %>
+      <strong><%= pluralize(review.rating, "Stars") %></strong><br/>
+      <%= review.comment %><br/>
       <% if review.user != nil %>
-        <em> by <%= review.user.name %></em>
+        <em> by <%= review.user.name %></em><br/>
         Added on: <%= review.created_at %>
       <% end %>
     </p>
@@ -35,11 +35,11 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :rating %>
+      <%= f.label :rating %> (0 - 5)<br/>
       <%= f.number_field :rating %>
     </div>
     <div class="field">
-      <%= f.label :comment %>
+      <%= f.label :comment, "Comments" %><br/>
       <%= f.text_area :comment %>
     </div>
     <div class="actions">
