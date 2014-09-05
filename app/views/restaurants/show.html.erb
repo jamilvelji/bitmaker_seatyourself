@@ -7,50 +7,26 @@
   <strong>Address:</strong>
   <%= @restaurant.address %>
 </p>
+<p>
+  <strong>Cuisine:</strong>
+  <%= @restaurant.food_type %>
+</p>
+<p>
+  <strong>Price:</strong>
+  $<%= @restaurant.price %>
+</p>
+<p>
+  <strong>Hours:</strong>
+  <%= @restaurant.hours %>
+</p>
+<p>
+  <strong>Website:</strong>
+  <%= @restaurant.website %>
+</p>
 
-<% if current_user %>
-  <h4>Reviews for <%= @restaurant.name %></h4>
 
-  <% @restaurant.reviews.each do |review| %>
-    <p>
-      <strong><%= pluralize(review.rating, "Stars") %></strong><br/>
-      <%= review.comment %><br/>
-      <% if review.user != nil %>
-        <em> by <%= review.user.name %></em><br/>
-        Added on: <%= review.created_at %>
-      <% end %>
-    </p>
-  <% end %>
-  <h4>Add a review</h4>
-  <%= form_for ([@restaurant, @review]) do |f| %>
-    <% if @review.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
-        <ul>
-          <% @review.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :rating %> (0 - 5)<br/>
-      <%= f.number_field :rating %>
-    </div>
-    <div class="field">
-      <%= f.label :comment, "Comments" %><br/>
-      <%= f.text_area :comment %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  <% end %>
-
-  <% else %>
-    <p>Please <%= link_to "Login", new_session_path %> to add a review.</p>
-
+<% if @restaurant.user == current_user  %>
+  <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+  <%= link_to 'Delete', @restaurant, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>
-
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>

@@ -6,7 +6,11 @@ class RestaurantsController < ApplicationController
   # GET /restaurants
   # GET /restaurants.json
   def index
-    @restaurants = Restaurant.all
+    if params[:search]
+      @restaurants = Restaurant.search(params[:search]).order("created_at DESC")
+    else
+      @restaurants = Restaurant.all.order('created_at DESC')
+    end
   end
 
   # GET /restaurants/1
@@ -25,15 +29,16 @@ class RestaurantsController < ApplicationController
 
   # GET /restaurants/1/edit
   def edit
+    current_user.posts.find(params[:id])
   end
 
   # POST /restaurants
   # POST /restaurants.json
   def create
     @restaurant = Restaurant.new(restaurant_params)
-
+    @restaurant.user = current_user
     if @restaurant.save
-      edirect_to @restaurant, notice: 'Restaurant was successfully created.'
+      redirect_to @restaurant, notice: 'Restaurant was successfully created.'
     else
       render :new
     end
@@ -59,7 +64,7 @@ class RestaurantsController < ApplicationController
   private
     def correct_user
       @restaurant = current_user.restaurants.find_by(id: params[:id])
-      redirect_to restaurants_path, notice: "Not authorized to edit this pin" if @restaurant.nil?
+      redirect_to restaurants_path, notice: "Not authorized to edit this restaurant" if @restaurant.nil?
     end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -69,6 +74,6 @@ class RestaurantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def restaurant_params
-      params.require(:restaurant).permit(:name, :address)
+      params.require(:restaurant).permit(:name, :address, :food_type, :website, :price, :hours)
     end
 end

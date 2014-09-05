@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :reservations
   has_many :reviews
+  has_many :restaurants
   validates :name, presence: true, length: {minimum: 2}
 
 end

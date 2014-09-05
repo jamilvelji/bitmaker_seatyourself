@@ -26,3 +26,6 @@ DONE
     > Restaurant name
     > Restaurant address
     > Restaurant reviews
+
+> A user can add restaurants
+> A user can edit 
