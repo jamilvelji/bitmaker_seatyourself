@@ -8,24 +8,16 @@ v0.1 - aMVP Features:
     > Restaurant name
     > Restaurant address
     > Restaurant cuisine
-    > Restaurant reviews (sorted newest to oldest)
-    
+    > Make a reservation system    
 > A user can add restaurants
 > A user can edit or delete restaurants they create
-> A user can add, edit or delete restaurant reviews owned by them
 > A user can add, edit or delete reservations owned by them
 > Users can signup, sign in and logout
 > User's profile page shows reservations made
-> A user can upload a menu to a restaurant owned by them
 > A user can upload a picture to a restaurant owned by them
 
-DONE
-============
-> Restaurants are displayed on the homepage
-> Each restaurant has a display page which shows:
-    > Restaurant name
-    > Restaurant address
-    > Restaurant reviews
-
-> A user can add restaurants
-> A user can edit 
+LEFT:
+=====
+> User's profile page shows reservations made
+> A user can upload a picture to a restaurant owned by them
+> Styling of the application
