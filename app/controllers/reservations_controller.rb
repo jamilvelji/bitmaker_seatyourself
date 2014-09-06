@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+  before_filter :load_restaurant
+  before_action :authenticate_user!
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -6,39 +8,40 @@ class ReservationsController < ApplicationController
   end
 
   def show
-  end
-
-  def new
-    @reservation = Reservation.new
-  end
-
-  def edit
+    @reservation = Reservation.find(params[:id])
   end
 
   def create
-    @reservation = Reservation.new(reservation_params)
+    @reservation = @restaurant.reservations.build(reservation_params)
+    @reservation.user = current_user
 
     if @reservation.save
-      redirect_to @reservation, notice: 'Reservation was successfully created.'
+      redirect_to restaurants_path, notice: 'Reservation was successfully created.'
     else
-      render :new
+      render 'restaurants/show'
     end
   end
 
-  def update
-    if @reservation.update(reservation_params)
-      redirect_to @reservation, notice: 'Reservation was successfully updated.'
-    else
-      render :edit
-    end
-  end
+  # def update
+  #   if @reservation.update(reservation_params)
+  #     redirect_to restaurants_path, notice: 'Reservation was successfully updated.'
+  #   else
+  #     render :edit
+  #   end
+  # end
 
   def destroy
+    @reservation = Reservation.find(params[:id])
     @reservation.destroy
-    redirect_to reservations_url, notice: 'Reservation was successfully destroyed.'
+    redirect_to restaurants_path, notice: 'Reservation was successfully destroyed.'
   end
 
   private
+
+    def load_restaurant
+      @restaurant = Restaurant.find(params[:restaurant_id])
+    end
+    
     def set_reservation
       @reservation = Reservation.find(params[:id])
     end

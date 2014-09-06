@@ -7,7 +7,12 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     if params[:search]
-      @restaurants = Restaurant.search(params[:search]).order("created_at DESC")
+      @query = Restaurant.search do
+          fulltext params[:search]
+          facet :price, :range => 0..100, :range_interval => 5
+        with(:price, Range.new(*params[:price_range].split("..").map(&:to_i))) if params[:price_range].present?
+      end
+      @restaurants = @query.results
     else
       @restaurants = Restaurant.all.order('created_at DESC')
     end
@@ -17,8 +22,9 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1.json
   def show
     @restaurant = Restaurant.find(params[:id])
+    
     if current_user
-      @review = @restaurant.reviews.build
+      @reservation = @restaurant.reservations.build
     end
   end
 

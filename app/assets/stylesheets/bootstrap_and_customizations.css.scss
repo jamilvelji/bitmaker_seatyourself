@@ -5,3 +5,11 @@ $jumbotron-bg: #ecf0f1;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+a:hover {
+  text-decoration: none;
+}
+
+.reservation-header {
+  margin-top: 2em;
+}

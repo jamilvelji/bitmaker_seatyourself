@@ -1,32 +1,64 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @restaurant.name %></h2>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2><%= @restaurant.name %></h2>
+  </div>
+  <div class="panel-body">
+    <p>
+      <strong>Address:</strong>
+      <a href="https://maps.google.com?q=<%= @restaurant.address.gsub(/\s/,'+').gsub(/,/,'') %>">
+        <%= @restaurant.address %>
+      </a>
 
-
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
-<p>
-  <strong>Cuisine:</strong>
-  <%= @restaurant.food_type %>
-</p>
-<p>
-  <strong>Price:</strong>
-  $<%= @restaurant.price %>
-</p>
-<p>
-  <strong>Hours:</strong>
-  <%= @restaurant.hours %>
-</p>
-<p>
-  <strong>Website:</strong>
-  <%= @restaurant.website %>
-</p>
-
-
-<% if @restaurant.user == current_user  %>
-  <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-  <%= link_to 'Delete', @restaurant, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<% end %>
-<%= link_to 'Back', restaurants_path %>
+    </p>
+    <p>
+      <strong>Cuisine:</strong>
+      <%= @restaurant.food_type %>
+    </p>
+    <p>
+      <strong>Price:</strong>
+      $<%= @restaurant.price %>
+    </p>
+    <p>
+      <strong>Hours:</strong>
+      <%= @restaurant.hours %>
+    </p>
+    <p>
+      <strong>Website:</strong>
+      <%= link_to @restaurant.website %>
+    </p>
+    <h4 class="reservation-header">Make a Reservation</h4>
+    <%= form_for([@restaurant, @reservation]) do |f| %>
+      <% if @reservation.errors.any? %>
+        <div id="error_explanation">
+          <h3><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h3>
+          <ul>
+            <% @reservation.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      
+      <div class="field">
+        <%= f.label :booking, "Choose your date and time" %><br/>
+        <%= f.datetime_select :booking, :ampm => true, :minute_step => 30 %>
+      </div>
+      <div class="field">
+        <%= f.label :party_size %><br/>
+        <%= f.number_field :party_size, :min => 1, :max => 20 %>
+      </div>
+      <div class="actions">
+        <%= f.submit nil, :class => 'btn btn-success' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="panel-footer">
+    <% if @restaurant.user == current_user  %>
+      <%= link_to 'Back', restaurants_path, :class => "btn btn-default" %>
+      <%= link_to 'Edit', edit_restaurant_path(@restaurant), :class => "btn btn-default" %> 
+      <%= link_to 'Delete', @restaurant, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-warning" %> 
+    <% end %>
+  </div>
+</div>

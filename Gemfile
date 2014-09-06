@@ -39,6 +39,8 @@ gem 'spring',        group: :development
 gem 'devise', '~> 3.3.0'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem 'sunspot_rails'
+gem 'progress_bar' 
 
 group :development, :test do
   gem 'sqlite3'
@@ -46,6 +48,7 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'pry-rails'
+  gem 'sunspot_solr'
 end
 
 group :production do

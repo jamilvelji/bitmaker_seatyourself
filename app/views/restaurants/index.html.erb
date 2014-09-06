@@ -1,8 +1,20 @@
-<%= form_tag(restaurants_path, :method => "get", id: "search-form") do %>
-  <%= label_tag :search, "Search Restaurants by Name:" %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Restaurants" %>
-  <%= submit_tag "Search", :name => nil, :cuisine => nil %>
-<% end %>
+
+<br/>
+<% if !@query.nil? %>
+  <strong>Select a Price Range:</strong>
+    <ul>
+      <% for row in @query.facet(:price).rows %>
+        <% if params[:price_range].blank? %>
+          <li><%= link_to row.value, :price_range => row.value, :search => params[:search] %> (<%= row.count %>)</li>
+        <% else %>
+          <li><%= row.value %> (<%= link_to "X", :price_range => nil %>)</li>
+        <% end %>
+      <% end %>
+    </ul>
+<% end %>  
+<br/>
+
+
 
 <% @restaurants.each do |restaurant| %>
   
