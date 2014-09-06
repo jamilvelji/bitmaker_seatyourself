@@ -43,7 +43,7 @@
       
       <div class="field">
         <%= f.label :booking, "Choose your date and time" %><br/>
-        <%= f.datetime_local_field :booking, :ampm => true, :minute_step => 30 %>
+        <%= f.datetime_select :booking, :ampm => true, :minute_step => 30 %>
       </div>
       <div class="field">
         <%= f.label :party_size %><br/>
