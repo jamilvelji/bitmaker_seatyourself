@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'cuisine/show'
 
   devise_for :users
+  resources :users, :only => [:show]
+
   resources :restaurants do
     resources :reviews, only: [:show, :create, :destroy]
     resources :reservations

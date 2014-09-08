@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3><%= @user.name %></h3>
+  </div>
+  <div class="panel-body">
+    <% @user.reservations.each do |reservation| %>
+      <p>
+        <strong>Party size: </strong>
+        <%= reservation.party_size %>
+      </p>
+      <p>
+        <strong>Time: </strong>
+        <%= reservation.booking.try(:strftime, '%A %B %d, %Y at %l:%M%p %Z') %>
+      </p>
+    <% end %>
+  </div>
+</div>
+
